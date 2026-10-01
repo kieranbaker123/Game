@@ -12,21 +12,21 @@ void Player::sety(int a)
     ypos = a;
 }
 
-void Player::move(char a)
+void Player::move(int a)
 {
     switch(a)
     {
-        case 'a':
+        case 'A':
         xpos -= 1;
         break;
-        case 'd':
+        case 'D':
         xpos += 1;
         break;
-        case 'w':
-        ypos += 1;
-        break;
-        case 's':
+        case 'W':
         ypos -= 1;
+        break;
+        case 'S':
+        ypos += 1;
         break;
     }
 }

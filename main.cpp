@@ -3,6 +3,8 @@
 #include "raylib.h"
 #include "player.h"
 
+char getInput();
+
 int main()
 {
     Player player1;
@@ -13,27 +15,24 @@ int main()
     constexpr char windowName[] = "Dungeon Crawler";
     InitWindow(screenWidth, screenHeight, windowName );
     int i;
-    int xpos;
-    int ypos;
     while (!WindowShouldClose())
     {
         BeginDrawing();
-        i = GetKeyPressed();
-        switch (i)
-            {
-            case 'a':
-            case 'd':
-            case 's':
-            case 'w':
-            player1.move(i);
-            break;
-            }
-	ClearBackground(RAYWHITE);
-        DrawRectangle( 100+ player1.xPos(), 100 +player1.yPos(), 100, 35, RED);
+        player1.move(getInput());
+	    ClearBackground(RAYGRAY);
+        DrawRectangle( player1.xPos(), player1.yPos(), 100, 35, RED);
         EndDrawing();
     }
 
     CloseWindow();
 
     return 0;
+}
+
+char getInput()
+{
+    bool w = IsKeyDown(KEY_W)
+    bool a = IsKeyDown(KEY_A)
+    bool s = IsKeyDown(KEY_S)
+    bool d = IsKeyDown(KEY_D) 
 }
