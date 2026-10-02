@@ -3,6 +3,12 @@
 #include<string>
 #include"player.h"
 #include "configuration.h"
+#include "raylib.h"
+
+void Player::draw()
+{
+   DrawCircle(xPos(),yPos(),10,RED); 
+}
 
 void Player::setx(int a)
 {
@@ -19,27 +25,27 @@ void Player::move(char a)
     switch(a)
         {
         case 'a':
-        if (xpos > 0)
+        if (xpos > playerSize)
             {
-            xpos -= 0.5;
+            xpos -= playerSpeed * 0.05 + 0.2;
             }
         break;
         case 'd':
-        if (xpos < config::screenWidth )
+        if (xpos < config::screenWidth - playerSize)
             {
-            xpos += 0.5;
+            xpos += playerSpeed * 0.05 + 0.2;
             }
         break;
         case 's':
-        if ( ypos < config::screenHeight )
+        if ( ypos < config::screenHeight - playerSize)
             {
-            ypos += 0.5;
+            ypos += playerSpeed * 0.05 + 0.2;
             }
         break;
         case 'w':
-        if ( ypos > 0 )
+        if ( ypos > playerSize)
             {
-            ypos -= 0.5;
+            ypos -= playerSpeed * 0.05 + 0.2;
             }
         break;
         }

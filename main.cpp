@@ -25,7 +25,7 @@ int main()
         if ( move[2] == '1' ) {player1.move('s');}
         if ( move[3] == '1' ) {player1.move('d');}
         ClearBackground(GRAY);
-        DrawCircle( player1.xPos(), player1.yPos(), 20, RED);
+        player1.draw();
         EndDrawing();
     }
 
@@ -43,3 +43,5 @@ std::string getMove()
     std::string result = std::to_string(w) + std::to_string(a) + std::to_string(s) + std::to_string(d);
     return result;
 }
+
+
