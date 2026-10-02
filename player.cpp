@@ -1,5 +1,6 @@
 // player.cpp
 
+#include<string>
 #include"player.h"
 
 void Player::setx(int a)
@@ -12,23 +13,23 @@ void Player::sety(int a)
     ypos = a;
 }
 
-void Player::move(int a)
+void Player::move(char a)
 {
     switch(a)
-    {
-        case 'A':
+        {
+        case 'a':
         xpos -= 1;
         break;
-        case 'D':
+        case 'd':
         xpos += 1;
         break;
-        case 'W':
-        ypos -= 1;
-        break;
-        case 'S':
+        case 's':
         ypos += 1;
         break;
-    }
+        case 'w':
+        ypos -= 1;
+        break;
+        }
 }
 
 int Player::xPos()

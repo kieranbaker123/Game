@@ -1,5 +1,7 @@
 // player.h
 
+#include<string>
+
 class Player
 {
 private:
