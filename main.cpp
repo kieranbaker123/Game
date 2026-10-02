@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "player.h"
 #include "configuration.h"
+#include "room.h"
 
 std::string getMove();
 
@@ -11,21 +12,22 @@ int main()
 {
     std::string move;
     Player player1;
+    Room room1;
     player1.setx(100);
     player1.sety(100);
     constexpr char windowName[] = "Game";
     InitWindow(config::screenWidth, config::screenHeight, windowName );
-    int i;
     while (!WindowShouldClose())
     {
         BeginDrawing();
         move = getMove();
-	    if ( move[0] == '1' ) {player1.move('w');}
+        if ( move[0] == '1' ) {player1.move('w');}
         if ( move[1] == '1' ) {player1.move('a');}
         if ( move[2] == '1' ) {player1.move('s');}
         if ( move[3] == '1' ) {player1.move('d');}
-        ClearBackground(GRAY);
+        ClearBackground(WHITE);
         player1.draw();
+        room1.drawRoom();
         EndDrawing();
     }
 

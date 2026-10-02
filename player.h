@@ -7,7 +7,7 @@ class Player
 private:
     float xpos;
     float ypos;
-    float playerSpeed = 1;
+    float playerSpeed = 0;
     int playerSize = 10;
 
 public:

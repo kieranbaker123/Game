@@ -7,7 +7,8 @@
 
 void Player::draw()
 {
-   DrawCircle(xPos(),yPos(),10,RED); 
+    DrawCircle(xPos(),yPos(),10,RED); 
+    
 }
 
 void Player::setx(int a)
