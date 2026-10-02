@@ -2,6 +2,7 @@
 
 #include<string>
 #include"player.h"
+#include "configuration.h"
 
 void Player::setx(int a)
 {
@@ -18,26 +19,38 @@ void Player::move(char a)
     switch(a)
         {
         case 'a':
-        xpos -= 1;
+        if (xpos > 0)
+            {
+            xpos -= 0.5;
+            }
         break;
         case 'd':
-        xpos += 1;
+        if (xpos < config::screenWidth )
+            {
+            xpos += 0.5;
+            }
         break;
         case 's':
-        ypos += 1;
+        if ( ypos < config::screenHeight )
+            {
+            ypos += 0.5;
+            }
         break;
         case 'w':
-        ypos -= 1;
+        if ( ypos > 0 )
+            {
+            ypos -= 0.5;
+            }
         break;
         }
 }
 
 int Player::xPos()
 {
-    return xpos;
+    return int(xpos);
 }
 
 int Player::yPos()
 {
-    return ypos;
+    return int(ypos);
 }

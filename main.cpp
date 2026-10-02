@@ -3,6 +3,7 @@
 #include <string>
 #include "raylib.h"
 #include "player.h"
+#include "configuration.h"
 
 std::string getMove();
 
@@ -12,10 +13,8 @@ int main()
     Player player1;
     player1.setx(100);
     player1.sety(100);
-    constexpr int screenWidth = 800;
-    constexpr int screenHeight = 600;
     constexpr char windowName[] = "Game";
-    InitWindow(screenWidth, screenHeight, windowName );
+    InitWindow(config::screenWidth, config::screenHeight, windowName );
     int i;
     while (!WindowShouldClose())
     {
@@ -25,11 +24,8 @@ int main()
         if ( move[1] == '1' ) {player1.move('a');}
         if ( move[2] == '1' ) {player1.move('s');}
         if ( move[3] == '1' ) {player1.move('d');}
-
-
-
         ClearBackground(GRAY);
-        DrawRectangle( player1.xPos(), player1.yPos(), 100, 35, RED);
+        DrawCircle( player1.xPos(), player1.yPos(), 20, RED);
         EndDrawing();
     }
 

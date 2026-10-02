@@ -5,8 +5,8 @@
 class Player
 {
 private:
-    int xpos;
-    int ypos;
+    float xpos;
+    float ypos;
 
 public:
     void move(char);
