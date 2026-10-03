@@ -5,7 +5,7 @@
 #include "player.h"
 #include "configuration.h"
 #include "room.h"
-
+#include <vector>
 
 std::string getMove();
 
@@ -15,11 +15,16 @@ int main()
     Player player1;
     Room room1;
     Room room2;
+    Exit exit2;
+    Exit exit1;
+    exit1.initExit(450, 0, 60, 20, 2, 480, 70);
+    room1.addExit(exit1);
+    exit2.initExit(450, 580, 60, 20, 1, 480, 530);
+    room2.addExit(exit2);
     room1.setID(1);
     room2.setID(2);
+    room1.color = WHITE;
     room2.color = GRAY;
-    Exit exit1;
-    room1.addExit( exit1 );
     player1.setx(50);
     player1.sety(50);
     constexpr char windowName[] = "Game";
@@ -27,19 +32,21 @@ int main()
     SetTargetFPS(60);
     Room* currentRoom = &room1;
     bool onExit;
+    std::vector<Room> rooms {room1, room2};
     while (!WindowShouldClose())
     {
-        
         BeginDrawing();
         move = getMove();
         if ( move[0] == '1' ) {player1.move('w');}
         if ( move[1] == '1' ) {player1.move('a');}
         if ( move[2] == '1' ) {player1.move('s');}
         if ( move[3] == '1' ) {player1.move('d');}
-        onExit = exit1.hasPlayer(player1.xPos(),player1.yPos());
+        onExit = (currentRoom->getExits())[0].hasPlayer(player1.xPos(),player1.yPos());
         if ( onExit == 1 )
             {
-            currentRoom = &room2;
+            currentRoom = &rooms[(currentRoom->getExits())[0].getDestination() - 1];
+            player1.setx((currentRoom->getExits())[0].getaX());
+            player1.sety((currentRoom->getExits())[0].getaY());
             }
         ClearBackground(currentRoom->color);
         player1.draw();

@@ -27,25 +27,25 @@ void Player::move(char a)
         case 'a':
         if (xpos > playerSize)
             {
-            xpos -= ( playerSpeed * 0.2 + 2 ) * config::screenWidth / 800;
+            xpos -= ( playerSpeed * 0.2 + 2.5 ) * config::screenWidth / 800;
             }
         break;
         case 'd':
         if (xpos < config::screenWidth - playerSize)
             {
-            xpos += ( playerSpeed * 0.2 + 2 ) * config::screenWidth / 800;
+            xpos += ( playerSpeed * 0.2 + 2.5 ) * config::screenWidth / 800;
             }
         break;
         case 's':
         if ( ypos < config::screenHeight - playerSize)
             {
-            ypos += ( playerSpeed * 0.2 + 2 ) * config::screenHeight / 600;
+            ypos += ( playerSpeed * 0.2 + 2.5 ) * config::screenHeight / 600;
             }
         break;
         case 'w':
         if ( ypos > playerSize)
             {
-            ypos -= ( playerSpeed * 0.2 + 2 ) * config::screenHeight / 600;
+            ypos -= ( playerSpeed * 0.2 + 2.5 ) * config::screenHeight / 600;
             }
         break;
         }

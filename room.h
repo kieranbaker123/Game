@@ -18,4 +18,6 @@ class Room
     void drawRoom();
     int getID();
     void setID(int);
+    std::vector<Exit> getExits();
+
 };

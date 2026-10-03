@@ -3,6 +3,10 @@
 #include"room.h"
 #include"raylib.h"
 
+std::vector<Exit> Room::getExits()
+{
+return exits;
+}
 
 void Room::addExit( Exit& e )
 {

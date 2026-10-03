@@ -3,9 +3,25 @@
 #include "exit.h"
 #include "raylib.h"
 
-void Exit::exit(int x, int y, int width, int height, int destinationRoom)
+int Exit::getaX()
     {
-    
+    return aX;
+    }
+
+int Exit::getaY()
+    {
+    return aY;
+    }
+
+void Exit::initExit(int xLocation, int yLocation, int width1, int height1, int destRoom, int spawnX, int spawnY)
+    {
+    x = xLocation;
+    y = yLocation;
+    width = width1;
+    height = height1;
+    destinationRoom = destRoom;
+    aX = spawnX;
+    aY = spawnY;
     }
 
 bool Exit::hasPlayer(int playerX, int playerY)

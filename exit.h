@@ -5,18 +5,25 @@
 class Exit
 {
 private:
-    int x = 450;
-    int y = 450;
-    int width = 20;
+    int x;
+    int y;
+    int width = 60;
     int height = 20;
 
-    int destinationRoom = 2;
+    int aX;
+    int aY;
+
+    int destinationRoom;
 
 public:
-    void exit(int x, int y, int width, int height, int destinationRoom);
+
+    void initExit(int x, int y, int width, int height, int destinationRoom, int spawnx, int spawny);
 
     bool hasPlayer(int playerX, int playerY);
     int getDestination();
     
     void draw();
+    
+    int getaY();
+    int getaX();
 };
