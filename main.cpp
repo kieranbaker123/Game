@@ -6,6 +6,7 @@
 #include "configuration.h"
 #include "room.h"
 
+
 std::string getMove();
 
 int main()
@@ -13,10 +14,16 @@ int main()
     std::string move;
     Player player1;
     Room room1;
-    player1.setx(100);
-    player1.sety(100);
+    Room room2;
+    room1.setID(1);
+    room2.setID(2);
+    Exit exit1;
+    room1.addExit( exit1 );
+    player1.setx(50);
+    player1.sety(50);
     constexpr char windowName[] = "Game";
     InitWindow(config::screenWidth, config::screenHeight, windowName );
+    SetTargetFPS(60);
     while (!WindowShouldClose())
     {
         BeginDrawing();

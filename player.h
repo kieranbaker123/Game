@@ -1,12 +1,14 @@
 // player.h
 
+#pragma once
+
 #include<string>
 
 class Player
 {
 private:
-    float xpos;
-    float ypos;
+    float xpos = 50;
+    float ypos = 50;
     float playerSpeed = 0;
     int playerSize = 10;
 

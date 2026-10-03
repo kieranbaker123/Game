@@ -8,7 +8,6 @@
 void Player::draw()
 {
     DrawCircle(xPos(),yPos(),10,RED); 
-    
 }
 
 void Player::setx(int a)
@@ -28,25 +27,25 @@ void Player::move(char a)
         case 'a':
         if (xpos > playerSize)
             {
-            xpos -= playerSpeed * 0.05 + 0.2;
+            xpos -= ( playerSpeed * 0.2 + 2 ) * config::screenWidth / 800;
             }
         break;
         case 'd':
         if (xpos < config::screenWidth - playerSize)
             {
-            xpos += playerSpeed * 0.05 + 0.2;
+            xpos += ( playerSpeed * 0.2 + 2 ) * config::screenWidth / 800;
             }
         break;
         case 's':
         if ( ypos < config::screenHeight - playerSize)
             {
-            ypos += playerSpeed * 0.05 + 0.2;
+            ypos += ( playerSpeed * 0.2 + 2 ) * config::screenHeight / 600;
             }
         break;
         case 'w':
         if ( ypos > playerSize)
             {
-            ypos -= playerSpeed * 0.05 + 0.2;
+            ypos -= ( playerSpeed * 0.2 + 2 ) * config::screenHeight / 600;
             }
         break;
         }
