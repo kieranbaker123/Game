@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include"raylib.h"
 #include<vector>
 #include "exit.h"
 
@@ -12,6 +13,7 @@ class Room
     std::vector<Exit> exits;
 
     public:
+    Color color = WHITE;
     void addExit( Exit& e );
     void drawRoom();
     int getID();
