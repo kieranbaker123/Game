@@ -3,7 +3,7 @@
 #include <string>
 #include "raylib.h"
 #include "player.h"
-#include "configuration.h"
+#include "config.h"
 #include "room.h"
 #include <vector>
 
@@ -11,6 +11,7 @@ std::string getMove();
 
 int main()
 {
+    std::vector<std::vector<Room>> board;
     std::string move;
     Player player1;
     Room room1;
@@ -37,10 +38,7 @@ int main()
     {
         BeginDrawing();
         move = getMove();
-        if ( move[0] == '1' ) {player1.move('w');}
-        if ( move[1] == '1' ) {player1.move('a');}
-        if ( move[2] == '1' ) {player1.move('s');}
-        if ( move[3] == '1' ) {player1.move('d');}
+        player1.playerUpdate(move);
         onExit = (currentRoom->getExits())[0].hasPlayer(player1.xPos(),player1.yPos());
         if ( onExit == 1 )
             {

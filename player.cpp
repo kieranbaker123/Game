@@ -1,9 +1,17 @@
 // player.cpp
 
-#include<string>
 #include"player.h"
-#include "configuration.h"
-#include "raylib.h"
+#include"config.h"
+#include"raylib.h"
+
+void Player::playerUpdate(std::string m)
+{
+    if ( m[0] == '1' ) {move('w');}
+    if ( m[1] == '1' ) {move('a');}
+    if ( m[2] == '1' ) {move('s');}
+    if ( m[3] == '1' ) {move('d');}    
+    draw();
+}
 
 void Player::draw()
 {

@@ -1,5 +1,5 @@
 // room.cpp
-#include"configuration.h"
+#include"config.h"
 #include"room.h"
 #include"raylib.h"
 

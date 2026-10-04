@@ -13,6 +13,7 @@ private:
     int playerSize = 10;
 
 public:
+    void playerUpdate(std::string);
     void move(char);
     int xPos();
     int yPos();
