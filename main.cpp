@@ -7,12 +7,9 @@
 #include "room.h"
 #include <vector>
 
-std::string getMove();
-
 int main()
 {
     std::vector<std::vector<Room>> board;
-    std::string move;
     Player player1;
     Room room1;
     Room room2;
@@ -37,8 +34,7 @@ int main()
     while (!WindowShouldClose())
     {
         BeginDrawing();
-        move = getMove();
-        player1.playerUpdate(move);
+        player1.playerUpdate(player1.getMove());
         onExit = (currentRoom->getExits())[0].hasPlayer(player1.xPos(),player1.yPos());
         if ( onExit == 1 )
             {
@@ -56,15 +52,4 @@ int main()
 
     return 0;
 }
-
-std::string getMove()
-{
-    bool w = IsKeyDown(KEY_W);
-    bool a = IsKeyDown(KEY_A);
-    bool s = IsKeyDown(KEY_S);
-    bool d = IsKeyDown(KEY_D);
-    std::string result = std::to_string(w) + std::to_string(a) + std::to_string(s) + std::to_string(d);
-    return result;
-}
-
 

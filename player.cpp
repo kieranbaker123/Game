@@ -4,6 +4,16 @@
 #include"config.h"
 #include"raylib.h"
 
+std::string Player::getMove()
+{
+    bool w = IsKeyDown(KEY_W);
+    bool a = IsKeyDown(KEY_A);
+    bool s = IsKeyDown(KEY_S);
+    bool d = IsKeyDown(KEY_D);
+    std::string result = std::to_string(w) + std::to_string(a) + std::to_string(s) + std::to_string(d);
+    return result;
+}
+
 void Player::playerUpdate(std::string m)
 {
     if ( m[0] == '1' ) {move('w');}
