@@ -13,15 +13,15 @@ int Exit::getaY()
     return aY;
     }
 
-void Exit::initExit(int xLocation, int yLocation, int width1, int height1, int destRoom, int spawnX, int spawnY)
+void Exit::initExit(int xLocation, int yLocation, int width1, int height1, char s, int spawnX, int spawnY)
     {
     x = xLocation;
     y = yLocation;
     width = width1;
     height = height1;
-    destinationRoom = destRoom;
     aX = spawnX;
     aY = spawnY;
+    side = s;
     }
 
 bool Exit::hasPlayer(int playerX, int playerY)
@@ -36,12 +36,12 @@ bool Exit::hasPlayer(int playerX, int playerY)
     return 0;
     }
 
-int Exit::getDestination()
-    {
-    return destinationRoom;
-    }
-
 void Exit::draw()
     {
     DrawRectangle( x, y, width, height, YELLOW );
     }
+
+char Exit::getSide()
+{
+return side;
+}

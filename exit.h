@@ -13,17 +13,18 @@ private:
     int aX;
     int aY;
 
-    int destinationRoom;
+    char side;
 
 public:
 
-    void initExit(int x, int y, int width, int height, int destinationRoom, int spawnx, int spawny);
+    void initExit(int x, int y, int width, int height, char, int spawnx, int spawny);
 
     bool hasPlayer(int playerX, int playerY);
-    int getDestination();
     
     void draw();
     
     int getaY();
     int getaX();
+
+    char getSide();
 };
