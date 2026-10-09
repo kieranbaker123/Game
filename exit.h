@@ -7,13 +7,15 @@ class Exit
 private:
     int x;
     int y;
-    int width = 60;
+    int width = 20;
     int height = 20;
 
     int aX;
     int aY;
 
     char side;
+
+    bool canReturn = 1;
 
 public:
 
@@ -26,5 +28,14 @@ public:
     int getaY();
     int getaX();
 
+    // functions for making exit on opposite room 
+    int getWidth();
+    int getHeight();
     char getSide();
+    int outExitX();
+    int outExitY();
+    bool canReturn();
+    char getOppSide();
+    int makeOppAx();
+    int makeOppAy();
 };
