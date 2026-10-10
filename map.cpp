@@ -1,95 +1,133 @@
 // map.cpp
 
 #include"map.h"
+#include"room.h"
 
-Map Map::makeMap(int height, int width )
+
+Map::Map()
+    : startRoom(false, false, true, true),
+        map(config::mapHeight, std::vector<Room*>(config::mapWidth, nullptr))
 {
-    currentRoomX = width / 2;
-    currentRoomY = height / 2;
-    map = ( height, std::vector<Room>( width, nullptr));
-    map[int(currentRoomY)][int(currentRoomX)] = startRoom;
-    currentRoom = &map[int(config::mapHeight/2)][int(config::mapWidth/2)];
-    return map;
+    currentRoomX = config::mapWidth / 2;
+    currentRoomY = config::mapHeight / 2;
+    roomData.push_back(startRoom);
+    map[int(currentRoomY)][int(currentRoomX)] = &roomData[0];
+    currentRoom = map[int(config::mapHeight/2)][int(config::mapWidth/2)];
 }
 
-Room Map::generateRoom(Exit entrance);
+Room Map::generateRoom()
 {
-    Room room;
-    Exit exit1;
-    Exit exit2;
+    roomsTraveled += 1;
     // 0 = cannot make exit to ...
-    // 1 = can make exit to ...
-    // 2 = must make exit to ...
-    // 3 = must link exit to ...
-    int up;
-    int down;
-    int left;
-    int right;
-    vector <Exit> temp;
-    int i;
-    exit1.initExit(entrance.outExitX(), entrance.outExitY(), entrance.getHeight, entrance.getWidth, entrance.getOppSide(), entrance.makeOppAx(), entrance.makeOppAy()); 
-    room.addExit(exit1);
-    if ( entrance.getSide() != 'n' && currentRoomY != 0 )
+    // 2 = can make exit to ...
+    // 1 = must make exit to ...
+    int north;
+    int south;
+    int west;
+    int east;
+
+    if ( currentRoomX > 0 )
         {
-        if ( map[currentRoomY-1][currentRoomX] != nullptr )
+        if ( map[currentRoomY][currentRoomX-1] == nullptr )
             {
-            up = 1;
+            west = 2;
+            }
+        else if ( map[currentRoomY][currentRoomX-1]->hasExitEast() )
+            {
+            west = 1;
             }
         else
             {
-            temp = map[currentRoomY-1][currentRoomX].getExits();
-            for ( i = 0; i < temp.size(); i++ )
-                {
-                exit2 = temp[i];
-                if ( exit2.getSide == 's' )
-                    {
-                    up = 3;
-                    }
-                }
-            if ( up != 3 )
-                {
-                up = 0;
-                }
+            west = 0;
             }
         }
     else
         {
-        if ( currentRoomY != 0 )
-            {
-            up = 3;
-            }
-        else 
-            {
-            up = 0;
-            }
+        west = 0;
         }
-    if ( entrance.getSide() != 's' )
+    if ( currentRoomY > 0 )
         {
-        if ( map[currentRoomY+1][currentRoomX] != nullptr )
+        if ( map[currentRoomY-1][currentRoomX] == nullptr )
             {
-            down = 1;
+            north = 2;
+            }
+        else if ( map[currentRoomY-1][currentRoomX]->hasExitSouth() )
+            {
+            west = 1;
+            }
+        else
+            {
+            west = 0;
             }
         }
-    if ( entrance.getSide() != 'w' )
+    else
         {
-        if ( map[currentRoomY][currentRoomX-1] != nullptr )
-            {
-            left = 1;
-            }
+        west = 0;
         }
-    if ( entrance.getSide() != 'n' )
+    if ( currentRoomX < config::mapWidth )
         {
-        if ( map[currentRoomY-1][currentRoomX] != nullptr )
+        if ( map[currentRoomY][currentRoomX+1] == nullptr )
             {
-            right = 1;
+            west = 2;
+            }
+        else if ( map[currentRoomY][currentRoomX+1]->hasExitWest() )
+            {
+            west = 1;
+            }
+        else
+            {
+            west = 0;
             }
         }
+    else
+        {
+        west = 0;
+        }
+    if ( currentRoomY > 0 )
+        {
+        if ( map[currentRoomY+1][currentRoomX] == nullptr )
+            {
+            north = 2;
+            }
+        else if ( map[currentRoomY+1][currentRoomX]->hasExitNorth() )
+            {
+            west = 1;
+            }
+        else
+            {
+            west = 0;
+            }
+        }
+    else
+        {
+        west = 0;
+        }
+
+    if ( west == 2 )
+        {
+        west = (( rand() % 100 ) >= 20 );
+        }
+    if ( east == 2 )
+        {
+        east = (( rand() % 100 ) >= 20 );
+        }
+    if ( south == 2 )
+        {
+        south = (( rand() % 100 ) >= 20 );
+        }
+    if ( north == 2 )
+        {
+        north = (( rand() % 100 ) >= 20 );
+        }
+
+    Room room(north,south,east,west);
+    return room;
 }
 
-void Map::changeRoom(Exit exit)
+void Map::changeRoom(char a)
 {
-    char a;
-    a = exit.getSide();
+    int y = currentRoomY;
+    int x = currentRoomX; 
     switch (a)
         {
         case 'n':
@@ -105,15 +143,19 @@ void Map::changeRoom(Exit exit)
             --currentRoomX;
             break;
         }
-
-        int playerY = exit.getAy();
-        int playerX = exit.getAx();
     
     if ( map[currentRoomY][currentRoomX] == nullptr )
         {
-        map[currentRoomY][currentRoomX] = generateRoom(exit);
+        roomData.push_back(generateRoom());
+        map[currentRoomY][currentRoomX] = &roomData[roomData.size() - 1];
         }
     else 
         {
-        currentroom = map[currentRoomY][currentRoomX];
-        }        
+        currentRoom = map[currentRoomY][currentRoomX];
+        }
+}
+
+Room* Map::getCurrentRoom()
+{
+return currentRoom;
+}        

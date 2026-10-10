@@ -13,7 +13,7 @@ int Exit::getaY()
     return aY;
     }
 
-void Exit::initExit(int xLocation, int yLocation, int width1, int height1, char s, int spawnX, int spawnY)
+Exit::Exit(int xLocation, int yLocation, int width1, int height1, char s, int spawnX, int spawnY)
     {
     x = xLocation;
     y = yLocation;
@@ -80,7 +80,7 @@ int Exit::outExitY()
 
 bool Exit::canReturn()
 {
-    return canReturn;
+    return _canReturn;
 }
 
 int Exit::getWidth()
@@ -114,7 +114,7 @@ int Exit::makeOppAx()
         {
         case 'n':
         case 's':
-        return Ax;        
+        return aX;        
         case 'w':
         return ( x + 20 + width);
         case 'e':
@@ -128,7 +128,7 @@ int Exit::makeOppAy()
         {
         case 'w':
         case 'e':
-        return Ay;
+        return aY;
         case 'n':
         return ( x + 20 + height);
         case 's':

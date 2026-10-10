@@ -4,20 +4,26 @@
 
 #include"raylib.h"
 #include<vector>
-#include "exit.h"
 
 class Room
 {
     private:
-    int roomID;
-    std::vector<Exit> exits;
+    // has exit on side
+    bool exitNorth;
+    bool exitSouth;
+    bool exitEast;
+    bool exitWest;
 
     public:
-    Color color = WHITE;
-    void addExit( Exit& e );
-    void drawRoom();
-    int getID();
-    void setID(int);
-    std::vector<Exit> getExits();
 
+    Room(bool north, bool south, bool east, bool west);
+    
+    bool hasExitNorth();
+    bool hasExitSouth();
+    bool hasExitEast();
+    bool hasExitWest();
+
+    Color color = WHITE;
+    void drawRoom();
+    char onExit(int,int);
 };

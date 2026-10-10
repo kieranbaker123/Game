@@ -2,29 +2,30 @@
 
 #pragma once
 
+#include"room.h"
 #include"config.h"
 #include<vector>
+
 
 class Map
 {
 private:
     std::vector<std::vector<Room*>> map;
+    std::vector<Room> roomData;
     Room startRoom;
-    Room* currentRoom = &startRoom;
-    int roomsTraveled;
-    int bossRoom = rand() % 5 + 8;
-    int finalBossRoom;
+    Room* currentRoom;
+    int roomsTraveled = 0;
     int currentRoomX;
     int currentRoomY;
-
+    
 public:
     
-    Map makeMap(int,int);
+    Map();
 
-    Room* generateRoom(Exit entrance);
-    void changeRoom(Exit);
+    Room generateRoom();
+    void changeRoom(char);
     void checkRoom();
-
+    Room* getCurrentRoom();    
 };
 
 

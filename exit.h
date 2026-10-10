@@ -15,11 +15,11 @@ private:
 
     char side;
 
-    bool canReturn = 1;
+    bool _canReturn = 1;
 
 public:
 
-    void initExit(int x, int y, int width, int height, char, int spawnx, int spawny);
+    Exit(int x, int y, int width, int height, char, int spawnx, int spawny);
 
     bool hasPlayer(int playerX, int playerY);
     
