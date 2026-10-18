@@ -2,12 +2,20 @@
 
 #include"map.h"
 #include"room.h"
+#include<iostream>
 
+int Map::getx()
+{
+std::cout << std::endl << currentRoomY << std::endl << currentRoomX << "x";
+return 0;
+}
 
 Map::Map()
     : startRoom(false, false, true, true),
         map(config::mapHeight, std::vector<Room*>(config::mapWidth, nullptr))
 {
+    roomData.reserve(config::mapWidth * config::mapHeight);
+
     currentRoomX = config::mapWidth / 2;
     currentRoomY = config::mapHeight / 2;
     roomData.push_back(startRoom);
@@ -53,54 +61,54 @@ Room Map::generateRoom()
             }
         else if ( map[currentRoomY-1][currentRoomX]->hasExitSouth() )
             {
-            west = 1;
+            north = 1;
             }
         else
             {
-            west = 0;
+            north = 0;
             }
         }
     else
         {
-        west = 0;
+        north = 0;
         }
-    if ( currentRoomX < config::mapWidth )
+    if ( currentRoomX < config::mapWidth - 1 )
         {
         if ( map[currentRoomY][currentRoomX+1] == nullptr )
             {
-            west = 2;
+            east = 2;
             }
         else if ( map[currentRoomY][currentRoomX+1]->hasExitWest() )
             {
-            west = 1;
+            east = 1;
             }
         else
             {
-            west = 0;
+            east = 0;
             }
         }
     else
         {
-        west = 0;
+        east = 0;
         }
-    if ( currentRoomY > 0 )
+    if ( currentRoomY < config::mapHeight - 1 )
         {
         if ( map[currentRoomY+1][currentRoomX] == nullptr )
             {
-            north = 2;
+            south = 2;
             }
         else if ( map[currentRoomY+1][currentRoomX]->hasExitNorth() )
             {
-            west = 1;
+            south = 1;
             }
         else
             {
-            west = 0;
+            south = 0;
             }
         }
     else
         {
-        west = 0;
+        south = 0;
         }
 
     if ( west == 2 )
@@ -121,6 +129,7 @@ Room Map::generateRoom()
         }
 
     Room room(north,south,east,west);
+    room.randColor();
     return room;
 }
 
@@ -148,6 +157,7 @@ void Map::changeRoom(char a)
         {
         roomData.push_back(generateRoom());
         map[currentRoomY][currentRoomX] = &roomData[roomData.size() - 1];
+        currentRoom = map[currentRoomY][currentRoomX];
         }
     else 
         {

@@ -22,6 +22,7 @@ public:
     
     Map();
 
+    int getx();
     Room generateRoom();
     void changeRoom(char);
     void checkRoom();

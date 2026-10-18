@@ -19,6 +19,7 @@ int main()
     InitWindow(config::screenWidth, config::screenHeight, windowName );
     SetTargetFPS(60);
     char a;
+    int i;
     while (!WindowShouldClose())
     {
         BeginDrawing();
@@ -29,8 +30,9 @@ int main()
             player1.setx(500);
             player1.sety(500);
             }
+        i = map.getx();
         player1.playerUpdate(player1.getMove());
-        ClearBackground(map.getCurrentRoom()->color);
+        ClearBackground(map.getCurrentRoom()->getColor());
         player1.draw();
         map.getCurrentRoom()->drawRoom();
         EndDrawing();

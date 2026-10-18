@@ -21,4 +21,5 @@ public:
     void sety(int);
     void draw();
     std::string getMove();
+    
 };

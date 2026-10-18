@@ -27,13 +27,13 @@ if ( exitSouth )
     {
     DrawRectangle( config::screenWidth / 2 - 30, config::screenHeight - wallWidth, 60, wallWidth, YELLOW);
     }
-if ( exitEast )
+if ( exitWest )
     {
     DrawRectangle( 0, config::screenHeight / 2 - 30, wallWidth, 60, YELLOW);
     }
-if ( exitWest )
+if ( exitEast )
     {
-    DrawRectangle( config::screenWidth, config::screenHeight / 2 - 30, wallWidth, 60, YELLOW);
+    DrawRectangle( config::screenWidth - wallWidth, config::screenHeight / 2 - 30, wallWidth, 60, YELLOW);
     }
 }
 
@@ -43,25 +43,37 @@ char Room::onExit(int x, int y)
         {
         if ( y < config::screenHeight / 2 + 30 && y > config::screenHeight / 2 - 30 )
             {
-            return 'w';
+            if ( exitWest )
+                {
+                return 'w';
+                }
             }
         }
     if ( x > config::screenWidth - 20 )
         {
         if ( y < config::screenHeight / 2 + 30 && y > config::screenHeight / 2 - 30 )
             {
-            return 'e';
+            if ( exitEast )
+                {
+                return 'e';
+                }
             }
         }
-    if ( x > config::screenWidth - 30 && x < config::screenWidth + 30 )
+    if ( x > config::screenWidth / 2 - 30 && x < config::screenWidth / 2 + 30 )
         {
         if ( y < 20 )
             {
-            return 'n';
+            if ( exitNorth )
+                {
+                return 'n';
+                }
             }
         if ( y > config::screenHeight - 20 )
             {
-            return 's';
+            if ( exitSouth )
+                {
+                return 's';
+                }
             }
         }
 return '\0';
@@ -82,4 +94,15 @@ return exitEast;
 bool Room::hasExitWest()
 {
 return exitWest;
+}
+
+void Room::randColor()
+{
+    unsigned char a = rand() % 155 + 100;
+    color = { a, a, a, 255 };
+}
+
+Color Room::getColor()
+{
+    return color;
 }

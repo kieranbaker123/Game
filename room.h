@@ -13,17 +13,20 @@ class Room
     bool exitSouth;
     bool exitEast;
     bool exitWest;
+    Color color = WHITE;
 
     public:
 
     Room(bool north, bool south, bool east, bool west);
+    
+    void randColor();
+    Color getColor();
     
     bool hasExitNorth();
     bool hasExitSouth();
     bool hasExitEast();
     bool hasExitWest();
 
-    Color color = WHITE;
     void drawRoom();
     char onExit(int,int);
 };
