@@ -14,26 +14,25 @@ exitWest = west;
 
 void Room::drawRoom()
 {
-int wallWidth = 20;
-DrawRectangle( 0, 0, config::screenWidth, wallWidth, BLACK); // top roof
-DrawRectangle( 0, 0, wallWidth, config::screenHeight, BLACK); // left wall
-DrawRectangle(config::screenWidth - wallWidth, 0, wallWidth, config::screenHeight, BLACK); // right wall
-DrawRectangle(0, config::screenHeight - wallWidth, config::screenWidth, wallWidth, BLACK); // bottom wall
+DrawRectangle( 0, 0, config::screenWidth, config::wallWidth, BLACK); // top roof
+DrawRectangle( 0, 0, config::wallWidth, config::screenHeight, BLACK); // left wall
+DrawRectangle(config::screenWidth - config::wallWidth, 0, config::wallWidth, config::screenHeight, BLACK); // right wall
+DrawRectangle(0, config::screenHeight - config::wallWidth, config::screenWidth, config::wallWidth, BLACK); // bottom wall
 if ( exitNorth )
     {
-    DrawRectangle( config::screenWidth / 2 - 30, 0, 60, wallWidth, YELLOW);
+    DrawRectangle( config::screenWidth / 2 - 30, 0, 60, config::wallWidth, YELLOW);
     }
 if ( exitSouth )
     {
-    DrawRectangle( config::screenWidth / 2 - 30, config::screenHeight - wallWidth, 60, wallWidth, YELLOW);
+    DrawRectangle( config::screenWidth / 2 - 30, config::screenHeight - config::wallWidth, 60, config::wallWidth, YELLOW);
     }
 if ( exitWest )
     {
-    DrawRectangle( 0, config::screenHeight / 2 - 30, wallWidth, 60, YELLOW);
+    DrawRectangle( 0, config::screenHeight / 2 - 30, config::wallWidth, 60, YELLOW);
     }
 if ( exitEast )
     {
-    DrawRectangle( config::screenWidth - wallWidth, config::screenHeight / 2 - 30, wallWidth, 60, YELLOW);
+    DrawRectangle( config::screenWidth - config::wallWidth, config::screenHeight / 2 - 30, config::wallWidth, 60, YELLOW);
     }
 }
 

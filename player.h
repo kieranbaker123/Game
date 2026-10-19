@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include"config.h"
+#include"projectile.h"
 #include<string>
 
 class Player
@@ -10,7 +12,7 @@ private:
     float xpos = 50;
     float ypos = 50;
     float playerSpeed = 0;
-    int playerSize = 10;
+    int playerSize = 10 * config::screenWidth / 800;
 
 public:
     void playerUpdate(std::string);
@@ -21,5 +23,6 @@ public:
     void sety(int);
     void draw();
     std::string getMove();
+    Projectile fire();
     
 };

@@ -1,8 +1,10 @@
 // player.cpp
 
 #include"player.h"
+#include"projectile.h"
 #include"config.h"
 #include"raylib.h"
+#include<cmath>
 
 std::string Player::getMove()
 {
@@ -25,7 +27,7 @@ void Player::playerUpdate(std::string m)
 
 void Player::draw()
 {
-    DrawCircle(xPos(),yPos(),10,RED); 
+    DrawCircle(xPos(),yPos(),playerSize,RED); 
 }
 
 void Player::setx(int a)
@@ -45,25 +47,25 @@ void Player::move(char a)
         case 'a':
         if (xpos > playerSize)
             {
-            xpos -= ( playerSpeed * 0.2 + 2.5 ) * config::screenWidth / 800;
+            xpos -= ( playerSpeed * 0.1 + 1 ) * config::baseSpeed;
             }
         break;
         case 'd':
         if (xpos < config::screenWidth - playerSize )
             {
-            xpos += ( playerSpeed * 0.2 + 2.5 ) * config::screenWidth / 800;
+            xpos += ( playerSpeed * 0.1 + 1 ) * config::baseSpeed;
             }
         break;
         case 's':
         if ( ypos < config::screenHeight - playerSize )
             {
-            ypos += ( playerSpeed * 0.2 + 2.5 ) * config::screenHeight / 600;
+            ypos += ( playerSpeed * 0.1 + 1 ) * config::baseSpeed;
             }
         break;
         case 'w':
         if ( ypos > playerSize )
             {
-            ypos -= ( playerSpeed * 0.2 + 2.5 ) * config::screenHeight / 600;
+            ypos -= ( playerSpeed * 0.1 + 1 ) * config::baseSpeed;
             }
         break;
         }
@@ -77,4 +79,26 @@ int Player::xPos()
 int Player::yPos()
 {
     return int(ypos);
+}
+
+Projectile Player::fire()
+{
+    float xVelocity;
+    float yVelocity;
+    float xDiff;
+    float yDiff;
+    float distance;
+    int mouseX = GetMouseX();
+    int mouseY = GetMouseY();    
+    
+    xDiff = mouseX - xpos;
+    yDiff = mouseY - ypos;
+    distance = std::sqrt( xDiff * xDiff + yDiff * yDiff);
+
+    xVelocity = ( xDiff / distance ) * 2 * config::baseSpeed;
+    yVelocity = ( yDiff / distance ) * 2 * config::baseSpeed;
+    
+    Projectile bullet(xpos,ypos,xVelocity,yVelocity,4,GOLD);
+    bullet.move();
+    return bullet;
 }

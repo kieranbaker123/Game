@@ -16,7 +16,7 @@ private:
     Color color = BLACK;
 
 public:
-    Projectile( float x, float y, float vx, float vy );
+    Projectile( float x, float y, float vx, float vy, float radius, Color color );
     void move();
     void draw();
     void kill();

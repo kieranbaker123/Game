@@ -4,12 +4,14 @@
 #include"config.h"
 #include"raylib.h"
 
-Projectile::Projectile( float ax, float ay, float avx, float avy )
+Projectile::Projectile( float _x, float _y, float _vx, float _vy, float _radius, Color _color )
 {
-    x = ax;
-    y = ay;
-    vx = avx;
-    vy = avy;
+    x = _x;
+    y = _y;
+    vx = _vx;
+    vy = _vy;
+    radius = _radius;
+    color = _color;   
 }
 
 void Projectile::move()

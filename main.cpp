@@ -11,20 +11,19 @@
 
 int main()
 {
-    int i;
-    int j;
+    int i,j,cd = 0;
     Map map;
     srand(time(NULL));
     Player player1;
     player1.setx(50);
     player1.sety(50);
+    SetMousePosition( config::screenWidth / 2, config::screenHeight / 2 );
     std::vector<Projectile> projectiles;
     projectiles.reserve(1000);
     const char windowName[] = "Game";
     InitWindow(config::screenWidth, config::screenHeight, windowName );
-    SetTargetFPS(60);
+    SetTargetFPS(config::FPS);
     char a;
-    Projectile proj(300,300,1,1);
     while (!WindowShouldClose())
     {
         BeginDrawing();
@@ -36,11 +35,15 @@ int main()
             player1.sety(map.getSpawnY(a, player1.yPos()));
             projectiles.clear();
         }
-        projectiles.push_back( Projectile(player1.xPos(), player1.yPos(), rand() % 5 - 2, rand() % 5 - 2 ));
+        if ( IsKeyPressed(KEY_SPACE) && cd <= 0 )
+            {
+            cd = 10;
+            projectiles.push_back( player1.fire());
+            }
         player1.playerUpdate(player1.getMove());
         ClearBackground(map.getCurrentRoom()->getColor());
         j = projectiles.size();
-        for ( i = 0; i < j - 1; i++ )
+        for ( i = 0; i < j; i++ )
         {
             projectiles[i].move();
             projectiles[i].draw();
@@ -48,11 +51,13 @@ int main()
             {
                 projectiles.erase(projectiles.begin() + i);
                 j--;
+                i--;
             }
         }
         player1.draw();
         map.getCurrentRoom()->drawRoom();
         EndDrawing();
+        cd--;
     }
 
     CloseWindow();

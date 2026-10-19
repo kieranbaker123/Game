@@ -4,9 +4,14 @@
 
 namespace config
 {
-    const int wallWidth = 20;
-    const int mapHeight = 11;
-    const int mapWidth = 11;
-    constexpr int screenWidth = 800;
-    constexpr int screenHeight = 600;
+    // layout
+    constexpr int wallWidth = 20;
+    constexpr int mapHeight = 11;
+    constexpr int mapWidth = 11;
+    constexpr int screenWidth = 1000;
+    constexpr int screenHeight = screenWidth * 3 / 4;
+    
+    constexpr int FPS = 60;
+
+    constexpr float baseSpeed = screenWidth * 2 * FPS / 60 / 800;
 }
