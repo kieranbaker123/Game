@@ -2,13 +2,6 @@
 
 #include"map.h"
 #include"room.h"
-#include<iostream>
-
-int Map::getx()
-{
-std::cout << std::endl << currentRoomY << std::endl << currentRoomX << "x";
-return 0;
-}
 
 Map::Map()
     : startRoom(false, false, true, true),
@@ -22,6 +15,33 @@ Map::Map()
     map[int(currentRoomY)][int(currentRoomX)] = &roomData[0];
     currentRoom = map[int(config::mapHeight/2)][int(config::mapWidth/2)];
 }
+
+int Map::getSpawnX(char a, int x)
+{
+    switch(a)
+    {
+        case 'w':
+            return ( config::screenWidth - 40 );
+        case 'e':
+            return 40;
+        default:
+            return x;
+    }
+}
+
+int Map::getSpawnY(char a, int y)
+{
+    switch(a)
+    {
+        case 's':
+            return 40;
+        case 'n':
+            return ( config::screenHeight - 40 );
+        default:
+            return y;
+    }
+}
+
 
 Room Map::generateRoom()
 {

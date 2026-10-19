@@ -49,19 +49,19 @@ void Player::move(char a)
             }
         break;
         case 'd':
-        if (xpos < config::screenWidth - playerSize)
+        if (xpos < config::screenWidth - playerSize )
             {
             xpos += ( playerSpeed * 0.2 + 2.5 ) * config::screenWidth / 800;
             }
         break;
         case 's':
-        if ( ypos < config::screenHeight - playerSize)
+        if ( ypos < config::screenHeight - playerSize )
             {
             ypos += ( playerSpeed * 0.2 + 2.5 ) * config::screenHeight / 600;
             }
         break;
         case 'w':
-        if ( ypos > playerSize)
+        if ( ypos > playerSize )
             {
             ypos -= ( playerSpeed * 0.2 + 2.5 ) * config::screenHeight / 600;
             }

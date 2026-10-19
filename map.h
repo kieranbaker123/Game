@@ -22,7 +22,8 @@ public:
     
     Map();
 
-    int getx();
+    int getSpawnX(char,int);
+    int getSpawnY(char,int);    
     Room generateRoom();
     void changeRoom(char);
     void checkRoom();
