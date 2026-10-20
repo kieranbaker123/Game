@@ -9,23 +9,32 @@
 #include <vector>
 #include <string>
 
+struct images
+{
+    Texture2D arrow;
+} images;
+
 int main()
 {
+    InitWindow(config::screenWidth, config::screenHeight, "Game" );
+    int QQ = 0;
+    images.arrow = LoadTexture("arrow.png");
     int i,j,cd = 0;
     Map map;
     srand(time(NULL));
     Player player1;
-    player1.setx(50);
-    player1.sety(50);
     SetMousePosition( config::screenWidth / 2, config::screenHeight / 2 );
     std::vector<Projectile> projectiles;
     projectiles.reserve(1000);
-    const char windowName[] = "Game";
-    InitWindow(config::screenWidth, config::screenHeight, windowName );
     SetTargetFPS(config::FPS);
     char a;
     while (!WindowShouldClose())
     {
+        QQ++;
+        if ( QQ >= 360 )
+        {
+            QQ = 0;
+        }
         BeginDrawing();
         a = map.getCurrentRoom()->onExit(player1.xPos() ,player1.yPos());        
         if ( a != '\0' )
@@ -35,9 +44,8 @@ int main()
             player1.sety(map.getSpawnY(a, player1.yPos()));
             projectiles.clear();
         }
-        if ( IsKeyPressed(KEY_SPACE) && cd <= 0 )
+        if ( IsKeyPressed(KEY_SPACE) && player1.getCD() <= 0 )
             {
-            cd = 10;
             projectiles.push_back( player1.fire());
             }
         player1.playerUpdate(player1.getMove());
@@ -54,12 +62,17 @@ int main()
                 i--;
             }
         }
+
         player1.draw();
         map.getCurrentRoom()->drawRoom();
-        EndDrawing();
-        cd--;
-    }
 
+        DrawTexturePro(images.arrow, { 0, 0, (float)images.arrow.width, (float)images.arrow.height }, { 200, 200, 100, 100 }, {50, 50}, QQ, WHITE );
+
+        player1.reduceCD();
+        EndDrawing();
+    }
+    
+    UnloadTexture(images.arrow);
     CloseWindow();
 
     return 0;

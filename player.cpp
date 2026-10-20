@@ -83,6 +83,8 @@ int Player::yPos()
 
 Projectile Player::fire()
 {
+    currentCD = cooldown;    
+
     float xVelocity;
     float yVelocity;
     float xDiff;
@@ -90,6 +92,7 @@ Projectile Player::fire()
     float distance;
     int mouseX = GetMouseX();
     int mouseY = GetMouseY();    
+    float angle;
     
     xDiff = mouseX - xpos;
     yDiff = mouseY - ypos;
@@ -97,8 +100,20 @@ Projectile Player::fire()
 
     xVelocity = ( xDiff / distance ) * 2 * config::baseSpeed;
     yVelocity = ( yDiff / distance ) * 2 * config::baseSpeed;
+
+    angle = std::asin( xDiff / distance ) * 180.0 / M_PI;
     
-    Projectile bullet(xpos,ypos,xVelocity,yVelocity,4,GOLD);
-    bullet.move();
-    return bullet;
+    Projectile arrow(xpos,ypos,xVelocity,yVelocity,4,GOLD,angle);
+    arrow.move();
+    return arrow;
+}
+
+void Player::reduceCD()
+{
+--currentCD;
+}
+
+int Player::getCD()
+{
+return currentCD;
 }

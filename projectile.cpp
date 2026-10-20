@@ -4,7 +4,7 @@
 #include"config.h"
 #include"raylib.h"
 
-Projectile::Projectile( float _x, float _y, float _vx, float _vy, float _radius, Color _color )
+Projectile::Projectile( float _x, float _y, float _vx, float _vy, float _radius, Color _color, float _angle )
 {
     x = _x;
     y = _y;
@@ -12,6 +12,7 @@ Projectile::Projectile( float _x, float _y, float _vx, float _vy, float _radius,
     vy = _vy;
     radius = _radius;
     color = _color;   
+    angleDeg = _angle;
 }
 
 void Projectile::move()
@@ -40,4 +41,9 @@ void Projectile::kill()
 bool Projectile::isAlive()
 {
     return alive;
+}
+
+float Projectile::getAngle()
+{
+    return angleDeg;
 }
