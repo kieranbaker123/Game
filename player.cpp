@@ -103,17 +103,25 @@ Projectile Player::fire()
 
     angle = std::atan2(yDiff, xDiff) * 180.0 / M_PI + 90;
  
-    Projectile arrow(xpos,ypos,xVelocity,yVelocity,4,GOLD,angle);
+    Projectile arrow(xpos,ypos,xVelocity,yVelocity,4,GOLD,angle,arrowType);
     arrow.move();
     return arrow;
 }
 
 void Player::reduceCD()
 {
---currentCD;
+    --currentCD;
 }
 
 int Player::getCD()
 {
-return currentCD;
+    return currentCD;
+}
+
+void Player::arrowUpgrade()
+{
+    if ( arrowType < 2 )
+    {
+    ++arrowType;
+    }
 }

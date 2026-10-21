@@ -26,11 +26,6 @@ int main()
     char a;
     while (!WindowShouldClose())
     {
-        QQ += 3;
-        if ( QQ >= 360 )
-        {
-            QQ = 0;
-        }
         BeginDrawing();
         a = map.getCurrentRoom()->onExit(player1.xPos() ,player1.yPos());        
         if ( a != '\0' )
@@ -58,9 +53,14 @@ int main()
                 i--;
             }
         }
+        
+        if ( IsKeyPressed(KEY_T) )
+        {
+            player1.arrowUpgrade();
+        }
 
-        player1.draw();
         map.getCurrentRoom()->drawRoom();
+        player1.draw();
 
         player1.reduceCD();
         EndDrawing();
