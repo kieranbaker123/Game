@@ -98,11 +98,11 @@ Projectile Player::fire()
     yDiff = mouseY - ypos;
     distance = std::sqrt( xDiff * xDiff + yDiff * yDiff);
 
-    xVelocity = ( xDiff / distance ) * 2 * config::baseSpeed;
-    yVelocity = ( yDiff / distance ) * 2 * config::baseSpeed;
+    xVelocity = ( xDiff / distance ) * 3 * config::baseSpeed;
+    yVelocity = ( yDiff / distance ) * 3 * config::baseSpeed;
 
-    angle = std::asin( xDiff / distance ) * 180.0 / M_PI;
-    
+    angle = std::atan2(yDiff, xDiff) * 180.0 / M_PI + 90;
+ 
     Projectile arrow(xpos,ypos,xVelocity,yVelocity,4,GOLD,angle);
     arrow.move();
     return arrow;

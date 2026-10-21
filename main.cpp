@@ -6,19 +6,15 @@
 #include "player.h"
 #include "config.h"
 #include "room.h"
+#include "sprites.h"
 #include <vector>
 #include <string>
-
-struct images
-{
-    Texture2D arrow;
-} images;
 
 int main()
 {
     InitWindow(config::screenWidth, config::screenHeight, "Game" );
     int QQ = 0;
-    images.arrow = LoadTexture("arrow.png");
+    LoadSprites();
     int i,j,cd = 0;
     Map map;
     srand(time(NULL));
@@ -30,7 +26,7 @@ int main()
     char a;
     while (!WindowShouldClose())
     {
-        QQ++;
+        QQ += 3;
         if ( QQ >= 360 )
         {
             QQ = 0;
@@ -66,13 +62,11 @@ int main()
         player1.draw();
         map.getCurrentRoom()->drawRoom();
 
-        DrawTexturePro(images.arrow, { 0, 0, (float)images.arrow.width, (float)images.arrow.height }, { 200, 200, 100, 100 }, {50, 50}, QQ, WHITE );
-
         player1.reduceCD();
         EndDrawing();
     }
     
-    UnloadTexture(images.arrow);
+    UnloadSprites();
     CloseWindow();
 
     return 0;

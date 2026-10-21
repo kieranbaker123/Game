@@ -3,7 +3,7 @@
 #include"projectile.h"
 #include"config.h"
 #include"raylib.h"
-
+#include"sprites.h"
 Projectile::Projectile( float _x, float _y, float _vx, float _vy, float _radius, Color _color, float _angle )
 {
     x = _x;
@@ -29,7 +29,7 @@ void Projectile::draw()
 {
     if ( alive )
     {
-        DrawCircle( x, y, radius, color);
+    DrawTexturePro(sprites.arrow, { 0, 0, (float)sprites.arrow.width, (float)sprites.arrow.height }, { x, y, config::arrowWid, config::arrowLen}, {(float)config::arrowWid / 2, (float)config::arrowLen / 2}, angleDeg, WHITE );
     }
 }
 
