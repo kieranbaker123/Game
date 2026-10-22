@@ -13,7 +13,7 @@ private:
     float ypos = 50;
     float playerSpeed = 0;
     int attackSpeed = 0;
-    int playerSize = 10 * config::screenWidth / 800;
+    int playerSize = config::playerSize;
     int cooldown = 18 - attackSpeed;
     int currentCD = 0;
     int arrowType = 0;

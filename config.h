@@ -16,7 +16,10 @@ namespace config
     constexpr int FPS = 60;
 
     constexpr float baseSpeed = screenWidth * 2 * FPS / 60 / 800;
+    constexpr int playerSize = 10 * scalingFactor;
+
     constexpr int arrowLen = 44 * scalingFactor;
     constexpr int arrowWid = 8 * scalingFactor;
+
 
 }
