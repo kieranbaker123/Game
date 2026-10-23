@@ -7,6 +7,7 @@
 #include "config.h"
 #include "room.h"
 #include "sprites.h"
+#include "enemy.h"
 #include <vector>
 #include <string>
 
@@ -22,8 +23,14 @@ int main()
     SetMousePosition( config::screenWidth / 2, config::screenHeight / 2 );
     std::vector<Projectile> projectiles;
     projectiles.reserve(1000);
+    std::vector<Enemy> enemies;
+    enemies.reserve(100);
     SetTargetFPS(config::FPS);
     char a;
+    enemies.push_back(Enemy(100,400));
+    enemies.push_back(Enemy(800,300));
+    enemies.push_back(Enemy(400,200));
+
     while (!WindowShouldClose())
     {
         BeginDrawing();
@@ -54,6 +61,16 @@ int main()
             }
         }
         
+        for ( i = 0; i < 3; i++ )
+        {
+            if ( enemies[i].shouldAttack(player1.xPos(),player1.yPos()) == 1 )
+            {
+                enemies[i].attack();
+            }
+            enemies[i].move(player1.xPos(),player1.yPos());
+            enemies[i].draw();
+            enemies[i].continueAttack();
+        }
         if ( IsKeyPressed(KEY_T) )
         {
             player1.arrowUpgrade();

@@ -1,20 +1,20 @@
 // enemy.h
 
-Class Enemy
+class Enemy
 {
-    Private:
+    private:
         float hitPoints = 20;
         float x = 100;
         float y = 100;
-        int velocity = 2;
+        float speed = 2;
         float angle = 0;
         int attackDmg = 1;
-        bool attacking = 0;        
         int attackTimer = 0;
         float attackRange = 12;
 
-    Public:
+    public:
 
+        Enemy(float,float);
         bool shouldAttack(int,int);
         void continueAttack();
         void move(int,int);
@@ -22,5 +22,4 @@ Class Enemy
         void draw();
         int getX();
         int getY();
-
-}
+};
