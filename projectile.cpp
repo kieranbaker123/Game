@@ -49,3 +49,14 @@ float Projectile::getAngle()
 {
     return angleDeg;
 }
+
+Vector2 Projectile::getPos()
+{
+    return {x,y};
+}
+
+int Projectile::doDamage()
+{
+    kill();
+    return damage;
+}

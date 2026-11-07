@@ -12,9 +12,10 @@ class Enemy
         float y = 100;
         float speed = 1;
         float angle = 0;
-        int attackDmg = 2;
+        int attackDmg = 3;
         int attackTimer = 0;
         float attackRange = 40;
+        bool alive = 1;
 
     public:
 
@@ -30,6 +31,8 @@ class Enemy
         int getAttackRange();
         
         void takeDamage(int);
-        Vector2 getHitbox();        
+        Vector2 getPos();
 
+        void kill();
+        bool isAlive();
 };

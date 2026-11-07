@@ -16,6 +16,7 @@ private:
     bool alive = 1;
     Color color = BLACK;
     int idx = 0;
+    int damage = 3 + idx;
 
 public:
     Projectile( float x, float y, float vx, float vy, float radius, Color color, float angle, int index );
@@ -24,5 +25,7 @@ public:
     void kill();
     bool isAlive();
     float getAngle();
+    Vector2 getPos();
+    int doDamage();
 
 };

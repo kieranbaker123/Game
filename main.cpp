@@ -31,8 +31,8 @@ int main()
     SetTargetFPS(config::FPS);
     char a;
     enemies.push_back(Enemy(100,400));
-//    enemies.push_back(Enemy(800,300));
-  //  enemies.push_back(Enemy(400,200));
+    enemies.push_back(Enemy(800,300));
+    enemies.push_back(Enemy(400,200));
 
     while (!WindowShouldClose())
     {
@@ -55,28 +55,43 @@ int main()
         for ( i = 0; i < j; i++ )
         {
             projectiles[i].move();
-            projectiles[i].draw();
             if ( projectiles[i].isAlive() == 0 )
             {
                 projectiles.erase(projectiles.begin() + i);
                 j--;
                 i--;
             }
+            else
+            {
+                projectiles[i].draw();
+            }
         }
         
-        for ( i = 0; i < 1; i++ )
+        for ( i = 0; i < enemies.size(); i++ )
         {
             if ( enemies[i].shouldAttack(player1.xPos(),player1.yPos()) == 1 )
             {
                 enemies[i].attack();
             }
             enemies[i].move(player1.xPos(),player1.yPos());
-            enemies[i].draw();
-            enemyAttack = enemies[i].continueAttack();
-            if ( enemyAttack )
+            for ( j = 0; j < projectiles.size(); j++ )
             {
-                player1.isHit(enemies[i].getHitbox(),enemies[i].getAttackRange());
+                if ( CheckCollisionCircles( enemies[i].getPos(), 24, projectiles[j].getPos(), config::arrowWid) )
+                {
+                    enemies[i].takeDamage(projectiles[j].doDamage());
+                    projectiles.erase(projectiles.begin() + j);
+                    j--;
+                }
+            }            
+            if ( enemies[i].continueAttack() )
+            {
+                player1.isHit(enemies[i].getPos(),enemies[i].getAttackRange());
             }
+            if ( !enemies[i].isAlive() )
+            {
+                enemies.erase(enemies.begin() + i);
+            }
+            enemies[i].draw();
         }
 
         map.getCurrentRoom()->drawRoom();
