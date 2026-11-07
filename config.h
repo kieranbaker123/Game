@@ -6,10 +6,11 @@ namespace config
 {
     // layout
     constexpr float scalingFactor = 1.25;
-
     constexpr int wallWidth = 20;
+
     constexpr int mapHeight = 11;
     constexpr int mapWidth = 11;
+
     constexpr int screenWidth = 800.0 * scalingFactor;
     constexpr int screenHeight = screenWidth * 3 / 4;
     
@@ -17,9 +18,11 @@ namespace config
 
     constexpr float baseSpeed = screenWidth * 2 * FPS / 60 / 800;
     constexpr int playerSize = 10 * scalingFactor;
-
+    
+    // sprite drawing
     constexpr int arrowLen = 44 * scalingFactor;
     constexpr int arrowWid = 8 * scalingFactor;
 
-
+    constexpr int clubTrollSize = 80 * scalingFactor;
+    
 }

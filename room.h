@@ -22,6 +22,8 @@ class Room
     void randColor();
     Color getColor();
     
+    bool canMove(float x, float y, int size);    
+    
     bool hasExitNorth();
     bool hasExitSouth();
     bool hasExitEast();

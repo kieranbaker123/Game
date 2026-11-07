@@ -97,11 +97,29 @@ return exitWest;
 
 void Room::randColor()
 {
-    unsigned char a = rand() % 155 + 100;
+    unsigned char a = rand() % 155 + 60;
     color = { a, a, a, 255 };
 }
 
 Color Room::getColor()
 {
     return color;
+}
+
+bool Room::canMove(float x, float y, int size)
+{
+    const float w  = config::wallWidth;
+    const float cx = config::screenWidth  / 2;
+    const float cy = config::screenHeight / 2;
+    const float gap = 30;   // half the door width
+
+    bool inGapX = std::fabs(x - cx) <= gap - size;
+    bool inGapY = std::fabs(y - cy) <= gap - size;
+
+    bool westOk  = (x - size >= w) || (exitWest  && inGapY);
+    bool eastOk  = (x + size <= config::screenWidth  - w) || (exitEast  && inGapY);
+    bool northOk = (y - size >= w) || (exitNorth && inGapX);
+    bool southOk = (y + size <= config::screenHeight - w) || (exitSouth && inGapX);
+
+    return westOk && eastOk && northOk && southOk;
 }

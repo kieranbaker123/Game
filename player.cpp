@@ -16,18 +16,38 @@ std::string Player::getMove()
     return result;
 }
 
-void Player::playerUpdate(std::string m)
+void Player::playerUpdate(std::string m, Room* room)
 {
-    if ( m[0] == '1' ) {move('w');}
-    if ( m[1] == '1' ) {move('a');}
-    if ( m[2] == '1' ) {move('s');}
-    if ( m[3] == '1' ) {move('d');}    
-    draw();
+    if ( m[0] == '1' ) move('w', room);
+    if ( m[1] == '1' ) move('a', room);
+    if ( m[2] == '1' ) move('s', room);
+    if ( m[3] == '1' ) move('d', room);
+}
+
+void Player::move(char a, Room* room)
+{
+    float step = ( playerSpeed * 0.1 + 1 ) * config::baseSpeed;
+    float nx = xpos;
+    float ny = ypos;
+
+    switch ( a )
+    {
+        case 'a': nx -= step; break;
+        case 'd': nx += step; break;
+        case 'w': ny -= step; break;
+        case 's': ny += step; break;
+    }
+
+    if ( room->canMove(nx, ny, playerSize) )
+    {
+        xpos = nx;
+        ypos = ny;
+    }
 }
 
 void Player::draw()
 {
-    DrawCircle(xPos(),yPos(),playerSize,RED); 
+    DrawCircle(xPos(),yPos(),playerSize,color); 
 }
 
 void Player::setx(int a)
@@ -38,37 +58,6 @@ void Player::setx(int a)
 void Player::sety(int a)
 {
     ypos = a;
-}
-
-void Player::move(char a)
-{
-    switch(a)
-        {
-        case 'a':
-        if (xpos > playerSize)
-            {
-            xpos -= ( playerSpeed * 0.1 + 1 ) * config::baseSpeed;
-            }
-        break;
-        case 'd':
-        if (xpos < config::screenWidth - playerSize )
-            {
-            xpos += ( playerSpeed * 0.1 + 1 ) * config::baseSpeed;
-            }
-        break;
-        case 's':
-        if ( ypos < config::screenHeight - playerSize )
-            {
-            ypos += ( playerSpeed * 0.1 + 1 ) * config::baseSpeed;
-            }
-        break;
-        case 'w':
-        if ( ypos > playerSize )
-            {
-            ypos -= ( playerSpeed * 0.1 + 1 ) * config::baseSpeed;
-            }
-        break;
-        }
 }
 
 int Player::xPos()
@@ -123,5 +112,15 @@ void Player::arrowUpgrade()
     if ( arrowType < 2 )
     {
     ++arrowType;
+    }
+}
+
+void Player::isHit(Vector2 enemyCords, int enemyRange)
+{
+    Vector2 playerCords = {xpos,ypos};
+    bool a = CheckCollisionCircles(playerCords, config::playerSize, enemyCords, enemyRange);
+    if ( a )
+    {
+        color = ORANGE;
     }
 }

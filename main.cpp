@@ -10,13 +10,16 @@
 #include "enemy.h"
 #include <vector>
 #include <string>
+#include<iostream>
+#include<ctime>
+#include<cstdlib>
 
 int main()
 {
     InitWindow(config::screenWidth, config::screenHeight, "Game" );
-    int QQ = 0;
+    bool enemyAttack;
     LoadSprites();
-    int i,j,cd = 0;
+    int i,j;
     Map map;
     srand(time(NULL));
     Player player1;
@@ -28,8 +31,8 @@ int main()
     SetTargetFPS(config::FPS);
     char a;
     enemies.push_back(Enemy(100,400));
-    enemies.push_back(Enemy(800,300));
-    enemies.push_back(Enemy(400,200));
+//    enemies.push_back(Enemy(800,300));
+  //  enemies.push_back(Enemy(400,200));
 
     while (!WindowShouldClose())
     {
@@ -46,7 +49,7 @@ int main()
             {
             projectiles.push_back( player1.fire());
             }
-        player1.playerUpdate(player1.getMove());
+        player1.playerUpdate(player1.getMove(), map.getCurrentRoom());
         ClearBackground(map.getCurrentRoom()->getColor());
         j = projectiles.size();
         for ( i = 0; i < j; i++ )
@@ -61,7 +64,7 @@ int main()
             }
         }
         
-        for ( i = 0; i < 3; i++ )
+        for ( i = 0; i < 1; i++ )
         {
             if ( enemies[i].shouldAttack(player1.xPos(),player1.yPos()) == 1 )
             {
@@ -69,11 +72,11 @@ int main()
             }
             enemies[i].move(player1.xPos(),player1.yPos());
             enemies[i].draw();
-            enemies[i].continueAttack();
-        }
-        if ( IsKeyPressed(KEY_T) )
-        {
-            player1.arrowUpgrade();
+            enemyAttack = enemies[i].continueAttack();
+            if ( enemyAttack )
+            {
+                player1.isHit(enemies[i].getHitbox(),enemies[i].getAttackRange());
+            }
         }
 
         map.getCurrentRoom()->drawRoom();
